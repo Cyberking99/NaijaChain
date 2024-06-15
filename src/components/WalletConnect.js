@@ -1,24 +1,17 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { connectWallet, disconnectWallet } from '../redux/walletSlice';
-import MyAlgoConnect from '@randlabs/myalgo-connect';
+import { connectToWallet, disconnectFromWallet } from '../redux/walletSlice';
 
 const WalletConnect = () => {
   const dispatch = useDispatch();
   const address = useSelector((state) => state.wallet.address);
 
-  const handleConnect = async () => {
-    try {
-      const myAlgoConnect = new MyAlgoConnect();
-      const accounts = await myAlgoConnect.connect();
-      dispatch(connectWallet(accounts[0].address));
-    } catch (err) {
-      console.error(err);
-    }
+  const handleConnect = () => {
+    dispatch(connectToWallet());
   };
 
   const handleDisconnect = () => {
-    dispatch(disconnectWallet());
+    dispatch(disconnectFromWallet());
   };
 
   return (

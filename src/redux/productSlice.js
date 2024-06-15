@@ -2,11 +2,14 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import algosdk from 'algosdk';
 
 export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
-  
+  return [
+    { id: '1', name: 'Product 1', price: 10, owner: 'OwnerAddress1' },
+    { id: '2', name: 'Product 2', price: 20, owner: 'OwnerAddress2' },
+  ];
 });
 
-export const addProduct = createAsyncThunk('products/addProduct', async (product, thunkAPI) => {
-  
+export const addProduct = createAsyncThunk('products/addProduct', async (product) => {
+  return { ...product, id: String(Date.now()) };
 });
 
 const productSlice = createSlice({

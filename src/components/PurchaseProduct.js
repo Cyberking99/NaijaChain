@@ -1,6 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import algosdk from 'algosdk';
+import { PeraWalletConnect } from '@perawallet/connect';
+
+const peraWallet = new PeraWalletConnect();
 
 const PurchaseProduct = ({ product }) => {
   const address = useSelector((state) => state.wallet.address);
@@ -21,8 +24,8 @@ const PurchaseProduct = ({ product }) => {
         suggestedParams: { ...params },
       });
 
-      const signedTxn = await myAlgoConnect.signTransaction(txn.toByte());
-      const { txId } = await algodClient.sendRawTransaction(signedTxn.blob).do();
+      const signedTxn = await peraWallet.signTransaction(txn.toByte());
+      const { txId } = await algodClient.sendRawTransaction(signedTxn).do();
       alert(`Transaction successful with ID: ${txId}`);
     } catch (err) {
       console.error(err);

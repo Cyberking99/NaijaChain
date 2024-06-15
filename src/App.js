@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AddProduct from './components/AddProduct';
 import ProductList from './components/ProductList';
 import ProductDetails from './components/ProductDetails';
@@ -10,11 +10,11 @@ const App = () => {
     <Router>
       <div>
         <WalletConnect />
-        <Switch>
-          <Route path="/" exact component={ProductList} />
-          <Route path="/add-product" component={AddProduct} />
-          <Route path="/product/:id" component={ProductDetails} />
-        </Switch>
+        <Routes>
+          <Route path="/" element={<ProductList />} />
+          <Route path="/add-product" element={<AddProduct />} />
+          <Route path="/product/:id" element={<ProductDetails />} />
+        </Routes>
       </div>
     </Router>
   );
